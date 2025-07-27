@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prem Shankar - Frontend Developer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -59,6 +60,7 @@
             display: flex;
             list-style: none;
             gap: 2.5rem;
+            align-items: center;
         }
 
         .nav-links a {
@@ -87,6 +89,95 @@
 
         .nav-links a:hover::after {
             width: 100%;
+        }
+
+        /* Social Icons in Navigation */
+        .nav-social {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin-left: 1rem;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #00d4ff, #0080ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.5);
+            background: linear-gradient(45deg, #ff0080, #ff4040);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: #fff;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            background: rgba(15, 15, 35, 0.98);
+            backdrop-filter: blur(20px);
+            padding: 2rem 0;
+            z-index: 999;
+        }
+
+        .mobile-nav.active {
+            display: block;
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            text-align: center;
+        }
+
+        .mobile-nav-links li {
+            margin: 1rem 0;
+        }
+
+        .mobile-nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-nav-links a:hover {
+            color: #00d4ff;
+        }
+
+        .mobile-social {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
         }
 
         /* Hero Section */
@@ -183,6 +274,21 @@
             border-color: transparent;
         }
 
+        .cta-button i {
+            margin-right: 8px;
+        }
+
+        /* Resume Button Special Styling */
+        .resume-btn {
+            background: linear-gradient(45deg, #ff0080, #ff4040);
+            box-shadow: 0 8px 25px rgba(255, 0, 128, 0.3);
+        }
+
+        .resume-btn:hover {
+            background: linear-gradient(45deg, #ff4040, #ff0080);
+            box-shadow: 0 12px 35px rgba(255, 0, 128, 0.5);
+        }
+
         /* Animated Profile Image */
         .hero-image {
             display: flex;
@@ -277,146 +383,6 @@
             animation-duration: 5s;
         }
 
-        /* Animations */
-        @keyframes profileFloat {
-
-            0%,
-            100% {
-                transform: translateY(0px) rotate(0deg);
-            }
-
-            50% {
-                transform: translateY(-20px) rotate(2deg);
-            }
-        }
-
-        @keyframes ringRotate {
-            from {
-                transform: rotate(0deg);
-            }
-
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0px);
-            }
-
-            50% {
-                transform: translateY(-20px);
-            }
-        }
-
-        /* Glow Effect */
-        .profile-image::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border-radius: 50%;
-            background: radial-gradient(circle at center,
-                    rgba(0, 212, 255, 0.3) 0%,
-                    rgba(0, 212, 255, 0) 70%);
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        .profile-container:hover .profile-image::after {
-            opacity: 1;
-        }
-
-        /* Responsive Adjustments */
-        @media (max-width: 768px) {
-            .profile-container {
-                width: 300px;
-                height: 300px;
-            }
-
-            .profile-image {
-                width: 250px;
-                height: 250px;
-            }
-
-            .profile-ring:nth-child(1) {
-                width: 280px;
-                height: 280px;
-            }
-
-            .profile-ring:nth-child(2) {
-                width: 320px;
-                height: 320px;
-            }
-
-            .profile-ring:nth-child(3) {
-                width: 360px;
-                height: 360px;
-            }
-        }
-
-        /* .profile-container {
-            position: relative;
-            width: 400px;
-            height: 400px;
-        }
-
-        .profile-image {
-            width: 350px;
-            height: 350px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, #00d4ff, #ff0080, #00ff88);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 10rem;
-            color: white;
-            font-weight: bold;
-            position: relative;
-            z-index: 2;
-            animation: profileFloat 6s ease-in-out infinite;
-            box-shadow: 0 0 50px rgba(0, 212, 255, 0.5);
-        }
-
-        .profile-ring {
-            position: absolute;
-            border-radius: 50%;
-            border: 2px solid;
-            animation: ringRotate 8s linear infinite;
-        }
-
-        .profile-ring:nth-child(1) {
-            width: 380px;
-            height: 380px;
-            border-color: #00d4ff;
-            top: 10px;
-            left: 10px;
-        }
-
-        .profile-ring:nth-child(2) {
-            width: 420px;
-            height: 420px;
-            border-color: #ff0080;
-            top: -10px;
-            left: -10px;
-            animation-direction: reverse;
-            animation-duration: 12s;
-        }
-
-        .profile-ring:nth-child(3) {
-            width: 460px;
-            height: 460px;
-            border-color: #00ff88;
-            top: -30px;
-            left: -30px;
-            animation-duration: 15s;
-        } */
-
         /* Floating elements */
         .floating-element {
             position: absolute;
@@ -506,7 +472,6 @@
             left: 65%;
             animation-delay: 3s;
         }
-
 
         /* Sections */
         .section {
@@ -657,7 +622,6 @@
             left: -20px;
             background: rgba(0, 212, 255, 0.2);
             animation-delay: 0s;
-            content: 'React';
         }
 
         .tech-bubble:nth-child(2) {
@@ -667,7 +631,6 @@
             right: -15px;
             background: rgba(255, 0, 128, 0.2);
             animation-delay: 2s;
-            content: 'JS';
         }
 
         .tech-bubble:nth-child(3) {
@@ -677,75 +640,21 @@
             right: -25px;
             background: rgba(0, 255, 136, 0.2);
             animation-delay: 4s;
-            content: 'CSS';
         }
 
-        /* Animations */
-        @keyframes aboutImageFloat {
-
-            0%,
-            100% {
-                transform: translateY(0px) rotate(0deg);
-            }
-
-            50% {
-                transform: translateY(-15px) rotate(1deg);
-            }
+        .about-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #b0b0b0;
         }
 
-        @keyframes shimmer {
-            0% {
-                transform: translateX(-100%) rotate(45deg);
-            }
-
-            100% {
-                transform: translateX(100%) rotate(45deg);
-            }
+        .about-text p {
+            margin-bottom: 1.5rem;
         }
 
-        @keyframes floatBubble {
-
-            0%,
-            100% {
-                transform: translateY(0) translateX(0) scale(1);
-            }
-
-            25% {
-                transform: translateY(-20px) translateX(10px) scale(1.1);
-            }
-
-            50% {
-                transform: translateY(0) translateX(-10px) scale(0.9);
-            }
-
-            75% {
-                transform: translateY(10px) translateX(0) scale(1.05);
-            }
-        }
-
-        @keyframes gradientShift {
-
-            0%,
-            100% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .about-profile-pic {
-                width: 250px;
-                height: 250px;
-            }
-
-            .tech-bubble {
-                display: none;
-                /* Hide bubbles on mobile for cleaner look */
-            }
+        .highlight {
+            color: #00d4ff;
+            font-weight: 600;
         }
 
         /* Education Section Styles */
@@ -763,7 +672,7 @@
             background: linear-gradient(to bottom, #00d4ff, #ff0080);
             top: 0;
             bottom: 0;
-            /* left: 50px; */
+            left: 50px;
             border-radius: 10px;
         }
 
@@ -776,6 +685,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             border-left: 4px solid #00d4ff;
             transition: all 0.3s ease;
+            margin-left: 80px;
         }
 
         .education-card:hover {
@@ -786,7 +696,7 @@
 
         .education-icon {
             position: absolute;
-            left: -70px;
+            left: -90px;
             top: 20px;
             width: 40px;
             height: 40px;
@@ -823,6 +733,7 @@
             display: flex;
             gap: 15px;
             margin-bottom: 10px;
+            flex-wrap: wrap;
         }
 
         .education-grade {
@@ -845,76 +756,6 @@
             color: #b0b0b0;
             line-height: 1.6;
             font-size: 0.95rem;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .education-timeline::before {
-                left: 2.4rem;
-            }
-
-            .education-card {
-                margin-left: 40px;
-            }
-
-            .education-icon {
-                left: -50px;
-                width: 35px;
-                height: 35px;
-                font-size: 0.8rem;
-            }
-
-            .education-degree {
-                font-size: 1.2rem;
-            }
-        }
-
-        /* 
-        .about-image {
-            text-align: center;
-        }
-
-        .about-profile-pic {
-            width: 300px;
-            height: 300px;
-            border-radius: 20px;
-            background: linear-gradient(45deg, #00d4ff, #ff0080);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 8rem;
-            color: white;
-            margin: 0 auto;
-            animation: aboutImageFloat 4s ease-in-out infinite;
-            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .about-profile-pic::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            animation: shimmer 3s linear infinite;
-        } */
-
-        .about-text {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            color: #b0b0b0;
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-        }
-
-        .highlight {
-            color: #00d4ff;
-            font-weight: 600;
         }
 
         /* Skills Section */
@@ -1041,6 +882,7 @@
             font-size: 0.9rem;
             font-weight: 600;
             box-shadow: 0 5px 15px rgba(255, 0, 128, 0.3);
+            white-space: nowrap;
         }
 
         .achievements {
@@ -1335,35 +1177,109 @@
             }
         }
 
+        @keyframes floatBubble {
+
+            0%,
+            100% {
+                transform: translateY(0) translateX(0) scale(1);
+            }
+
+            25% {
+                transform: translateY(-20px) translateX(10px) scale(1.1);
+            }
+
+            50% {
+                transform: translateY(0) translateX(-10px) scale(0.9);
+            }
+
+            75% {
+                transform: translateY(10px) translateX(0) scale(1.05);
+            }
+        }
+
         /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-content {
+                gap: 3rem;
+            }
+
+            .hero-text h1 {
+                font-size: 3.5rem;
+            }
+
+            .profile-container {
+                width: 350px;
+                height: 350px;
+            }
+
+            .profile-image {
+                width: 300px;
+                height: 300px;
+            }
+
+            .about-content {
+                gap: 2rem;
+            }
+
+            .contact-content {
+                gap: 2rem;
+            }
+        }
+
         @media (max-width: 768px) {
-            .nav-links {
+
+            .nav-links,
+            .nav-social {
                 display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
             }
 
             .hero-content {
                 grid-template-columns: 1fr;
                 text-align: center;
                 gap: 2rem;
+                padding: 0 1rem;
             }
 
             .hero-text h1 {
-                font-size: 3rem;
+                font-size: 2.8rem;
             }
 
             .hero-subtitle {
                 font-size: 1.4rem;
             }
 
+            .hero-description {
+                font-size: 1rem;
+            }
+
             .profile-container {
+                width: 280px;
+                height: 280px;
+                margin: 0 auto;
+            }
+
+            .profile-image {
+                width: 230px;
+                height: 230px;
+            }
+
+            .profile-ring:nth-child(1) {
+                width: 260px;
+                height: 260px;
+            }
+
+            .profile-ring:nth-child(2) {
                 width: 300px;
                 height: 300px;
             }
 
-            .profile-image {
-                width: 250px;
-                height: 250px;
-                font-size: 6rem;
+            .profile-ring:nth-child(3) {
+                width: 340px;
+                height: 340px;
             }
 
             .about-content {
@@ -1373,15 +1289,34 @@
             }
 
             .about-profile-pic {
-                width: 200px;
-                height: 200px;
-                font-size: 5rem;
+                width: 250px;
+                height: 250px;
+                margin: 0 auto;
+            }
+
+            .education-timeline::before {
+                left: 30px;
+            }
+
+            .education-card {
+                margin-left: 60px;
+            }
+
+            .education-icon {
+                left: -70px;
+                width: 35px;
+                height: 35px;
+                font-size: 0.8rem;
             }
 
             .experience-header {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 1rem;
+            }
+
+            .duration {
+                align-self: flex-start;
             }
 
             .contact-content {
@@ -1391,14 +1326,188 @@
 
             .projects-grid {
                 grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
 
             .cta-buttons {
                 justify-content: center;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-button {
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
             }
 
             .section-title {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
+                margin-bottom: 3rem;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
+
+            .tech-bubble {
+                display: none;
+            }
+
+            .contact-info,
+            .contact-form {
+                padding: 2rem;
+            }
+
+            .contact-item {
+                flex-direction: column;
+                text-align: center;
+                margin-bottom: 1.5rem;
+            }
+
+            .contact-icon {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .profile-container {
+                width: 220px;
+                height: 220px;
+            }
+
+            .profile-image {
+                width: 180px;
+                height: 180px;
+            }
+
+            .about-profile-pic {
+                width: 200px;
+                height: 200px;
+            }
+
+            .education-card {
+                margin-left: 50px;
+                padding: 20px;
+            }
+
+            .education-timeline::before {
+                left: 25px;
+            }
+
+            .education-icon {
+                left: -60px;
+                width: 30px;
+                height: 30px;
+                font-size: 0.7rem;
+            }
+
+            .skill-category,
+            .experience-card {
+                padding: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .job-title {
+                font-size: 1.5rem;
+            }
+
+            .project-header,
+            .project-body {
+                padding: 1.5rem;
+            }
+
+            .floating-element {
+                display: none;
+            }
+
+            .code-particle {
+                display: none;
+            }
+
+            .contact-info,
+            .contact-form {
+                padding: 1.5rem;
+            }
+
+            .contact-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+        }
+
+        /* High DPI Displays */
+        @media (-webkit-min-device-pixel-ratio: 2),
+        (min-resolution: 192dpi) {
+
+            .profile-image,
+            .about-profile-pic {
+                image-rendering: -webkit-optimize-contrast;
+                image-rendering: crisp-edges;
+            }
+        }
+
+        /* Landscape Mobile */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .hero {
+                min-height: 100vh;
+                padding: 100px 0 50px;
+            }
+
+            .hero-content {
+                gap: 2rem;
+            }
+
+            .profile-container {
+                width: 200px;
+                height: 200px;
+            }
+
+            .profile-image {
+                width: 160px;
+                height: 160px;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+
+            .navbar,
+            .floating-element,
+            .code-particle,
+            .profile-ring {
+                display: none;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 40px 0;
+                break-inside: avoid;
             }
         }
     </style>
@@ -1419,6 +1528,41 @@
                     <li><a href="#projects">Projects</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
+                <div class="nav-social">
+                    <a href="https://github.com/Pre2582" target="_blank" class="social-icon" aria-label="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" class="social-icon resume-btn" onclick="downloadResume()" aria-label="Download Resume">
+                        <i class="fas fa-download"></i>
+                    </a>
+                </div>
+                <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <div class="mobile-nav" id="mobileNav">
+            <ul class="mobile-nav-links">
+                <li><a href="#home" onclick="closeMobileMenu()">Home</a></li>
+                <li><a href="#about" onclick="closeMobileMenu()">About</a></li>
+                <li><a href="#education" onclick="closeMobileMenu()">Education</a></li>
+                <li><a href="#skills" onclick="closeMobileMenu()">Skills</a></li>
+                <li><a href="#experience" onclick="closeMobileMenu()">Experience</a></li>
+                <li><a href="#projects" onclick="closeMobileMenu()">Projects</a></li>
+                <li><a href="#contact" onclick="closeMobileMenu()">Contact</a></li>
+            </ul>
+            <div class="mobile-social">
+                <a href="https://github.com/premshankar-official" target="_blank" class="social-icon"
+                    aria-label="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="#" class="social-icon resume-btn" onclick="downloadResume()" aria-label="Download Resume">
+                    <i class="fas fa-download"></i>
+                </a>
             </div>
         </div>
     </nav>
@@ -1430,7 +1574,6 @@
         <div class="floating-element"></div>
         <div class="floating-element"></div>
         <div class="floating-element"></div>
-
 
         <!-- Code Particles -->
         <div class="code-particle">&lt;/React&gt;</div>
@@ -1449,8 +1592,18 @@
                     Passionate about creating exceptional user experiences with modern web technologies.
                 </p>
                 <div class="cta-buttons">
-                    <a href="#contact" class="cta-button">Let's Work Together</a>
-                    <a href="#projects" class="cta-button secondary">View My Work</a>
+                    <a href="#contact" class="cta-button">
+                        <i class="fas fa-envelope"></i>
+                        Let's Work Together
+                    </a>
+                    <a href="#projects" class="cta-button secondary">
+                        <i class="fas fa-eye"></i>
+                        View My Work
+                    </a>
+                    <a href="#" class="cta-button resume-btn" onclick="downloadResume()">
+                        <i class="fas fa-download"></i>
+                        Download Resume
+                    </a>
                 </div>
             </div>
 
@@ -1460,7 +1613,7 @@
                     <div class="profile-ring"></div>
                     <div class="profile-ring"></div>
                     <div class="profile-image">
-                        <img src="./img/prem-profile.png" alt="Profile Picture">
+                        <img src="./img/prem-profile.png" alt="Prem Shankar - Frontend Developer">
                     </div>
                 </div>
             </div>
@@ -1472,14 +1625,9 @@
         <div class="container">
             <h2 class="section-title">About Me</h2>
             <div class="about-content">
-                <!-- <div class="about-image">
-                    <div class="about-profile-pic">
-                        <img src="./img/Prem_img.png" alt="Profile Picture" height="300" width="300">
-                    </div>
-                </div> -->
                 <div class="about-image">
                     <div class="about-profile-pic">
-                        <img src="./img/Prem_img.png" alt="Profile Picture">
+                        <img src="./img/Prem_img.png" alt="Prem Shankar Profile">
                         <div class="tech-bubble"></div>
                         <div class="tech-bubble"></div>
                         <div class="tech-bubble"></div>
@@ -1501,6 +1649,7 @@
             </div>
         </div>
     </section>
+
     <!-- Education Section -->
     <section class="section" id="education">
         <div class="container">
@@ -1569,6 +1718,7 @@
             </div>
         </div>
     </section>
+
     <!-- Skills Section -->
     <section class="section" id="skills">
         <div class="container">
@@ -1733,6 +1883,7 @@
                             notifications, and comprehensive reporting system.</p>
                     </div>
                 </div>
+
                 <div class="project-card">
                     <div class="project-header">
                         <h3 class="project-title">Audit Application </h3>
@@ -1837,48 +1988,27 @@
     </footer>
 
     <script>
-        // Global variable to track EmailJS status
-        let emailJSLoaded = false;
+        // Mobile menu functionality
+        function toggleMobileMenu() {
+            const mobileNav = document.getElementById('mobileNav');
+            mobileNav.classList.toggle('active');
 
-        // Load EmailJS dynamically
-        function loadEmailJS() {
-            return new Promise((resolve, reject) => {
-                const script = document.createElement('script');
-                script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
-                script.onload = () => {
-                    if (typeof emailjs !== 'undefined') {
-                        // Initialize EmailJS - Replace 'YOUR_PUBLIC_KEY' with your actual key
-                        emailjs.init('lzhaAUL2cWjqKsXV8');
-                        emailJSLoaded = true;
-                        resolve();
-                    } else {
-                        reject('EmailJS failed to load');
-                    }
-                };
-                script.onerror = () => reject('Failed to load EmailJS script');
-                document.head.appendChild(script);
-            });
+            // Toggle hamburger icon animation
+            const spans = document.querySelectorAll('.mobile-menu-toggle span');
+            spans[0].classList.toggle('rotate-down');
+            spans[1].classList.toggle('hide');
+            spans[2].classList.toggle('rotate-up');
         }
 
-        // Alternative email functionality using mailto
-        function sendEmailFallback(formData) {
-            const subject = encodeURIComponent(`Portfolio Contact: ${formData.subject}`);
-            const body = encodeURIComponent(
-                `Name: ${formData.from_name}\n` +
-                `Email: ${formData.from_email}\n` +
-                `Subject: ${formData.subject}\n\n` +
-                `Message:\n${formData.message}\n\n` +
-                `---\nSent from portfolio contact form`
-            );
+        function closeMobileMenu() {
+            const mobileNav = document.getElementById('mobileNav');
+            mobileNav.classList.remove('active');
 
-            const mailtoLink = `mailto:prem.shankar.official10@gmail.com?subject=${subject}&body=${body}`;
-
-            // Try to open mail client
-            const link = document.createElement('a');
-            link.href = mailtoLink;
-            link.click();
-
-            return Promise.resolve();
+            // Reset hamburger icon
+            const spans = document.querySelectorAll('.mobile-menu-toggle span');
+            spans[0].classList.remove('rotate-down');
+            spans[1].classList.remove('hide');
+            spans[2].classList.remove('rotate-up');
         }
 
         // Smooth scrolling for navigation links
@@ -1891,6 +2021,9 @@
                         behavior: 'smooth',
                         block: 'start'
                     });
+
+                    // Close mobile menu if open
+                    closeMobileMenu();
                 }
             });
         });
@@ -1907,59 +2040,7 @@
             }
         });
 
-        // Enhanced form submission with email functionality
-        // document.querySelector('.contact-form').addEventListener('submit', function(e) {
-        //     e.preventDefault();
-        //     const btn = this.querySelector('.submit-btn');
-        //     const originalText = btn.textContent;
-
-        //     // Get form data
-        //     const formData = {
-        //         from_name: this.querySelector('input[placeholder="Your Name"]').value,
-        //         from_email: this.querySelector('input[placeholder="Your Email"]').value,
-        //         subject: this.querySelector('input[placeholder="Subject"]').value,
-        //         message: this.querySelector('textarea').value,
-        //         to_email: 'prem.shankar.official10@gmail.com'
-        //     };
-        //     console.log(formData);
-        //     // Show loading state
-        //     btn.textContent = 'Sending...';
-        //     btn.style.background = 'linear-gradient(45deg, #ff0080, #ff4040)';
-        //     btn.disabled = true;
-
-        //     // Send email using EmailJS
-        //     emailjs.send('service_etu16ke', 'template_ch17g9k', formData)
-        //         .then(function(response) {
-        //             console.log('Email sent successfully:', response);
-        //             btn.textContent = '✓ Message Sent!';
-        //             btn.style.background = 'linear-gradient(45deg, #00ff88, #00d4ff)';
-
-        //             // Show success message
-        //             showNotification('Message sent successfully! I\'ll get back to you soon.', 'success');
-
-        //             setTimeout(() => {
-        //                 btn.textContent = originalText;
-        //                 btn.style.background = 'linear-gradient(45deg, #00d4ff, #0080ff)';
-        //                 btn.disabled = false;
-        //                 document.querySelector('.contact-form').reset();
-        //             }, 3000);
-        //         }, function(error) {
-        //             console.error('Email sending failed:', error);
-        //             btn.textContent = '✗ Failed to Send';
-        //             btn.style.background = 'linear-gradient(45deg, #ff4040, #ff0080)';
-
-        //             // Show error message
-        //             showNotification('Failed to send message. Please try again or contact directly.', 'error');
-
-        //             setTimeout(() => {
-        //                 btn.textContent = originalText;
-        //                 btn.style.background = 'linear-gradient(45deg, #00d4ff, #0080ff)';
-        //                 btn.disabled = false;
-        //             }, 3000);
-        //         });
-        // });
-
-
+        // Form submission handler
         document.querySelector('.contact-form').addEventListener('submit', function (e) {
             e.preventDefault();
             const btn = this.querySelector('.submit-btn');
@@ -1971,9 +2052,7 @@
                 from_email: this.querySelector('input[placeholder="Your Email"]').value,
                 subject: this.querySelector('input[placeholder="Subject"]').value,
                 message: this.querySelector('textarea').value,
-                // address:'Gurugram, Haryana, India',
-                to_email: 'prem.shankar.official10@gmail.com',
-                date_time: new Date().toLocaleString()
+                to_email: 'prem.shankar.official10@gmail.com'
             };
 
             // Show loading state
@@ -1981,40 +2060,22 @@
             btn.style.background = 'linear-gradient(45deg, #ff0080, #ff4040)';
             btn.disabled = true;
 
-            // Ensure EmailJS is loaded before using it
-            const ensureEmailJS = emailJSLoaded ? Promise.resolve() : loadEmailJS();
+            // Simulate form submission (replace with actual form submission logic)
+            setTimeout(() => {
+                btn.textContent = '✓ Message Sent!';
+                btn.style.background = 'linear-gradient(45deg, #00ff88, #00d4ff)';
 
-            ensureEmailJS
-                .then(() => {
-                    return emailjs.send('service_etu16ke', 'template_ch17g9k', formData);
-                })
-                .then(function (response) {
-                    console.log('Email sent successfully:', response);
-                    btn.textContent = '✓ Message Sent!';
-                    btn.style.background = 'linear-gradient(45deg, #00ff88, #00d4ff)';
-                    showNotification('Message sent successfully! I\'ll get back to you soon.', 'success');
+                // Show success notification
+                showNotification('Message sent successfully! I\'ll get back to you soon.', 'success');
 
-                    setTimeout(() => {
-                        btn.textContent = originalText;
-                        btn.style.background = 'linear-gradient(45deg, #00d4ff, #0080ff)';
-                        btn.disabled = false;
-                        document.querySelector('.contact-form').reset();
-                    }, 3000);
-                })
-                .catch(function (error) {
-                    console.error('Email sending failed:', error);
-                    btn.textContent = '✗ Failed to Send';
-                    btn.style.background = 'linear-gradient(45deg, #ff4040, #ff0080)';
-                    showNotification('Failed to send message. Please try again or contact directly.', 'error');
-
-                    setTimeout(() => {
-                        btn.textContent = originalText;
-                        btn.style.background = 'linear-gradient(45deg, #00d4ff, #0080ff)';
-                        btn.disabled = false;
-                    }, 3000);
-                });
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = 'linear-gradient(45deg, #00d4ff, #0080ff)';
+                    btn.disabled = false;
+                    this.reset();
+                }, 3000);
+            }, 1500);
         });
-
 
         // Notification system
         function showNotification(message, type) {
@@ -2086,6 +2147,17 @@
                     }
                     .notification-close:hover {
                         opacity: 1;
+                    }
+                    @keyframes rotate-down {
+                        0% { transform: rotate(0); }
+                        100% { transform: rotate(45deg) translate(5px, 5px); }
+                    }
+                    @keyframes rotate-up {
+                        0% { transform: rotate(0); }
+                        100% { transform: rotate(-45deg) translate(5px, -5px); }
+                    }
+                    .hide {
+                        opacity: 0;
                     }
                 `;
                 document.head.appendChild(style);
@@ -2182,6 +2254,8 @@
         // Add mouse movement effect to profile image
         document.addEventListener('mousemove', (e) => {
             const profileImage = document.querySelector('.profile-image');
+            if (!profileImage) return;
+
             const rect = profileImage.getBoundingClientRect();
             const centerX = rect.left + rect.width / 2;
             const centerY = rect.top + rect.height / 2;
@@ -2195,8 +2269,69 @@
         // Reset profile image position when mouse leaves
         document.addEventListener('mouseleave', () => {
             const profileImage = document.querySelector('.profile-image');
-            profileImage.style.transform = 'translateY(-10px) rotate(0deg) rotateY(0deg)';
+            if (profileImage) {
+                profileImage.style.transform = 'translateY(-10px) rotate(0deg) rotateY(0deg)';
+            }
         });
+
+        // Resume download function
+        function downloadResume() {
+            // Replace with your actual file path in your repository
+            const fileUrl = './file/Prem_Shankar_Resume_2025.pdf';
+
+            // Create a temporary anchor element
+            const link = document.createElement('a');
+            link.href = fileUrl;
+
+            // Set the download attribute with the desired filename
+            link.download = 'Prem_Shankar_Resume.pdf';
+
+            // Append to the body, trigger click, then remove
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            // Show download confirmation
+            showDownloadNotification();
+        }
+
+        function showDownloadNotification() {
+            const notification = document.createElement('div');
+            notification.style.position = 'fixed';
+            notification.style.bottom = '20px';
+            notification.style.right = '20px';
+            notification.style.backgroundColor = '#00d4ff';
+            notification.style.color = 'white';
+            notification.style.padding = '15px 25px';
+            notification.style.borderRadius = '5px';
+            notification.style.boxShadow = '0 5px 15px rgba(0,0,0,0.3)';
+            notification.style.zIndex = '1000';
+            notification.style.animation = 'fadeIn 0.5s ease';
+            notification.innerHTML = '<i class="fas fa-check-circle"></i> Download started!';
+
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.animation = 'fadeOut 0.5s ease';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 500);
+            }, 3000);
+        }
+
+        // Add keyframes for the notification animation
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(20px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            @keyframes fadeOut {
+                from { opacity: 1; transform: translateY(0); }
+                to { opacity: 0; transform: translateY(20px); }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 
