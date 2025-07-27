@@ -2010,7 +2010,103 @@
             spans[1].classList.remove('hide');
             spans[2].classList.remove('rotate-up');
         }
+        // Global variable to track EmailJS status
+        let emailJSLoaded = false;
 
+        // Load EmailJS dynamically
+        function loadEmailJS() {
+            return new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
+                script.onload = () => {
+                    if (typeof emailjs !== 'undefined') {
+                        // Initialize EmailJS - Replace 'YOUR_PUBLIC_KEY' with your actual key
+                        emailjs.init('lzhaAUL2cWjqKsXV8');
+                        emailJSLoaded = true;
+                        resolve();
+                    } else {
+                        reject('EmailJS failed to load');
+                    }
+                };
+                script.onerror = () => reject('Failed to load EmailJS script');
+                document.head.appendChild(script);
+            });
+        }
+
+        // Alternative email functionality using mailto
+        function sendEmailFallback(formData) {
+            const subject = encodeURIComponent(`Portfolio Contact: ${formData.subject}`);
+            const body = encodeURIComponent(
+                `Name: ${formData.from_name}\n` +
+                `Email: ${formData.from_email}\n` +
+                `Subject: ${formData.subject}\n\n` +
+                `Message:\n${formData.message}\n\n` +
+                `---\nSent from portfolio contact form`
+            );
+
+            const mailtoLink = `mailto:prem.shankar.official10@gmail.com?subject=${subject}&body=${body}`;
+
+            // Try to open mail client
+            const link = document.createElement('a');
+            link.href = mailtoLink;
+            link.click();
+
+            return Promise.resolve();
+        }
+        document.querySelector('.contact-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const btn = this.querySelector('.submit-btn');
+            const originalText = btn.textContent;
+
+            // Get form data
+            const formData = {
+                from_name: this.querySelector('input[placeholder="Your Name"]').value,
+                from_email: this.querySelector('input[placeholder="Your Email"]').value,
+                subject: this.querySelector('input[placeholder="Subject"]').value,
+                message: this.querySelector('textarea').value,
+                // address:'Gurugram, Haryana, India',
+                to_email: 'prem.shankar.official10@gmail.com',
+                date_time: new Date().toLocaleString()
+            };
+
+            // Show loading state
+            btn.textContent = 'Sending...';
+            btn.style.background = 'linear-gradient(45deg, #ff0080, #ff4040)';
+            btn.disabled = true;
+
+            // Ensure EmailJS is loaded before using it
+            const ensureEmailJS = emailJSLoaded ? Promise.resolve() : loadEmailJS();
+
+            ensureEmailJS
+                .then(() => {
+                    return emailjs.send('service_etu16ke', 'template_ch17g9k', formData);
+                })
+                .then(function (response) {
+                    console.log('Email sent successfully:', response);
+                    btn.textContent = '✓ Message Sent!';
+                    btn.style.background = 'linear-gradient(45deg, #00ff88, #00d4ff)';
+                    showNotification('Message sent successfully! I\'ll get back to you soon.', 'success');
+
+                    setTimeout(() => {
+                        btn.textContent = originalText;
+                        btn.style.background = 'linear-gradient(45deg, #00d4ff, #0080ff)';
+                        btn.disabled = false;
+                        document.querySelector('.contact-form').reset();
+                    }, 3000);
+                })
+                .catch(function (error) {
+                    console.error('Email sending failed:', error);
+                    btn.textContent = '✗ Failed to Send';
+                    btn.style.background = 'linear-gradient(45deg, #ff4040, #ff0080)';
+                    showNotification('Failed to send message. Please try again or contact directly.', 'error');
+
+                    setTimeout(() => {
+                        btn.textContent = originalText;
+                        btn.style.background = 'linear-gradient(45deg, #00d4ff, #0080ff)';
+                        btn.disabled = false;
+                    }, 3000);
+                });
+        });
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -2038,43 +2134,6 @@
                 navbar.style.background = 'rgba(15, 15, 35, 0.95)';
                 navbar.style.boxShadow = 'none';
             }
-        });
-
-        // Form submission handler
-        document.querySelector('.contact-form').addEventListener('submit', function (e) {
-            e.preventDefault();
-            const btn = this.querySelector('.submit-btn');
-            const originalText = btn.textContent;
-
-            // Get form data
-            const formData = {
-                from_name: this.querySelector('input[placeholder="Your Name"]').value,
-                from_email: this.querySelector('input[placeholder="Your Email"]').value,
-                subject: this.querySelector('input[placeholder="Subject"]').value,
-                message: this.querySelector('textarea').value,
-                to_email: 'prem.shankar.official10@gmail.com'
-            };
-
-            // Show loading state
-            btn.textContent = 'Sending...';
-            btn.style.background = 'linear-gradient(45deg, #ff0080, #ff4040)';
-            btn.disabled = true;
-
-            // Simulate form submission (replace with actual form submission logic)
-            setTimeout(() => {
-                btn.textContent = '✓ Message Sent!';
-                btn.style.background = 'linear-gradient(45deg, #00ff88, #00d4ff)';
-
-                // Show success notification
-                showNotification('Message sent successfully! I\'ll get back to you soon.', 'success');
-
-                setTimeout(() => {
-                    btn.textContent = originalText;
-                    btn.style.background = 'linear-gradient(45deg, #00d4ff, #0080ff)';
-                    btn.disabled = false;
-                    this.reset();
-                }, 3000);
-            }, 1500);
         });
 
         // Notification system
