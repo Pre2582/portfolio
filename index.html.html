@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -191,7 +192,175 @@
             animation: fadeInRight 1s ease;
         }
 
+        /* Profile Image Container */
         .profile-container {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Profile Image */
+        .profile-image {
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            overflow: hidden;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 0 50px rgba(0, 212, 255, 0.5);
+            border: 5px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.5s ease;
+            animation: profileFloat 6s ease-in-out infinite;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: transform 0.5s ease;
+        }
+
+        /* Profile Rings */
+        .profile-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid;
+            animation: ringRotate 8s linear infinite;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+
+        .profile-ring:nth-child(1) {
+            width: 380px;
+            height: 380px;
+            border-color: #00d4ff;
+            top: 10px;
+            left: 10px;
+            animation-delay: 0s;
+        }
+
+        .profile-ring:nth-child(2) {
+            width: 420px;
+            height: 420px;
+            border-color: #ff0080;
+            top: -10px;
+            left: -10px;
+            animation-direction: reverse;
+            animation-duration: 12s;
+        }
+
+        .profile-ring:nth-child(3) {
+            width: 460px;
+            height: 460px;
+            border-color: #00ff88;
+            top: -30px;
+            left: -30px;
+            animation-duration: 15s;
+        }
+
+        /* Hover Effects */
+        .profile-container:hover .profile-image {
+            transform: scale(1.02);
+            box-shadow: 0 0 70px rgba(0, 212, 255, 0.7);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .profile-container:hover .profile-image img {
+            transform: scale(1.05);
+        }
+
+        .profile-container:hover .profile-ring {
+            animation-duration: 5s;
+        }
+
+        /* Animations */
+        @keyframes profileFloat {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(2deg);
+            }
+        }
+
+        @keyframes ringRotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Glow Effect */
+        .profile-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle at center,
+                    rgba(0, 212, 255, 0.3) 0%,
+                    rgba(0, 212, 255, 0) 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .profile-container:hover .profile-image::after {
+            opacity: 1;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .profile-container {
+                width: 300px;
+                height: 300px;
+            }
+
+            .profile-image {
+                width: 250px;
+                height: 250px;
+            }
+
+            .profile-ring:nth-child(1) {
+                width: 280px;
+                height: 280px;
+            }
+
+            .profile-ring:nth-child(2) {
+                width: 320px;
+                height: 320px;
+            }
+
+            .profile-ring:nth-child(3) {
+                width: 360px;
+                height: 360px;
+            }
+        }
+
+        /* .profile-container {
             position: relative;
             width: 400px;
             height: 400px;
@@ -246,7 +415,7 @@
             top: -30px;
             left: -30px;
             animation-duration: 15s;
-        }
+        } */
 
         /* Floating elements */
         .floating-element {
@@ -256,25 +425,40 @@
             animation: float 6s ease-in-out infinite;
         }
 
-        .floating-element:nth-child(1) { 
-            width: 80px; height: 80px; top: 15%; left: 5%; 
+        .floating-element:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 15%;
+            left: 5%;
             background: rgba(0, 212, 255, 0.2);
-            animation-delay: 0s; 
+            animation-delay: 0s;
         }
-        .floating-element:nth-child(2) { 
-            width: 60px; height: 60px; top: 70%; right: 10%; 
+
+        .floating-element:nth-child(2) {
+            width: 60px;
+            height: 60px;
+            top: 70%;
+            right: 10%;
             background: rgba(255, 0, 128, 0.2);
-            animation-delay: 2s; 
+            animation-delay: 2s;
         }
-        .floating-element:nth-child(3) { 
-            width: 40px; height: 40px; top: 30%; right: 15%; 
+
+        .floating-element:nth-child(3) {
+            width: 40px;
+            height: 40px;
+            top: 30%;
+            right: 15%;
             background: rgba(0, 255, 136, 0.2);
-            animation-delay: 4s; 
+            animation-delay: 4s;
         }
-        .floating-element:nth-child(4) { 
-            width: 120px; height: 120px; bottom: 15%; left: 8%; 
+
+        .floating-element:nth-child(4) {
+            width: 120px;
+            height: 120px;
+            bottom: 15%;
+            left: 8%;
             background: rgba(0, 128, 255, 0.1);
-            animation-delay: 1s; 
+            animation-delay: 1s;
         }
 
         /* Code particles */
@@ -287,12 +471,41 @@
             pointer-events: none;
         }
 
-        .code-particle:nth-child(5) { top: 20%; left: 80%; animation-delay: 0s; }
-        .code-particle:nth-child(6) { top: 60%; left: 85%; animation-delay: 3s; }
-        .code-particle:nth-child(7) { top: 80%; left: 75%; animation-delay: 6s; }
-        .code-particle:nth-child(8) { top: 40%; left: 60%; animation-delay: 4s; }
-        .code-particle:nth-child(9) { top: 50%; left: 55%; animation-delay: 5s; }
-        .code-particle:nth-child(10) {top: 60%; left: 65%; animation-delay: 3s; }
+        .code-particle:nth-child(5) {
+            top: 20%;
+            left: 80%;
+            animation-delay: 0s;
+        }
+
+        .code-particle:nth-child(6) {
+            top: 60%;
+            left: 85%;
+            animation-delay: 3s;
+        }
+
+        .code-particle:nth-child(7) {
+            top: 80%;
+            left: 75%;
+            animation-delay: 6s;
+        }
+
+        .code-particle:nth-child(8) {
+            top: 40%;
+            left: 60%;
+            animation-delay: 4s;
+        }
+
+        .code-particle:nth-child(9) {
+            top: 50%;
+            left: 55%;
+            animation-delay: 5s;
+        }
+
+        .code-particle:nth-child(10) {
+            top: 60%;
+            left: 65%;
+            animation-delay: 3s;
+        }
 
 
         /* Sections */
@@ -338,6 +551,204 @@
             align-items: center;
         }
 
+        /* About Image Container */
+        .about-image {
+            text-align: center;
+            position: relative;
+            perspective: 1000px;
+        }
+
+        /* Profile Picture Container */
+        .about-profile-pic {
+            width: 300px;
+            height: 300px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0, 212, 255, 0.4);
+            transform-style: preserve-3d;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: aboutImageFloat 6s ease-in-out infinite;
+            border: 3px solid rgba(255, 255, 255, 0.15);
+            background: linear-gradient(45deg, #0f0f23, #1a1a2e);
+        }
+
+        /* Profile Image */
+        .about-profile-pic img {
+            width: 100%;
+            height: 135%;
+            object-fit: cover;
+            object-position: center;
+            transition: all 0.5s ease;
+            filter: grayscale(20%) contrast(110%);
+        }
+
+        /* Hover Effects */
+        .about-profile-pic:hover {
+            transform: rotateY(15deg) rotateX(5deg) scale(1.05);
+            box-shadow: 0 30px 70px rgba(0, 212, 255, 0.6);
+            border-color: rgba(0, 212, 255, 0.3);
+        }
+
+        .about-profile-pic:hover img {
+            filter: grayscale(0%) contrast(120%);
+            transform: scale(1.03);
+        }
+
+        /* Decorative Elements */
+        .about-profile-pic::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to bottom right,
+                    transparent 45%,
+                    rgba(0, 212, 255, 0.1) 50%,
+                    transparent 55%);
+            transform: rotate(45deg);
+            animation: shimmer 6s linear infinite;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .about-profile-pic::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 16px;
+            padding: 3px;
+            background: linear-gradient(45deg, #00d4ff, #ff0080, #00ff88);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.7;
+            transition: all 0.5s ease;
+        }
+
+        .about-profile-pic:hover::after {
+            opacity: 1;
+            animation: gradientShift 3s ease infinite;
+            background-size: 200% 200%;
+        }
+
+        /* Floating Tech Elements */
+        .tech-bubble {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: white;
+            backdrop-filter: blur(5px);
+            z-index: 3;
+            animation: floatBubble 8s ease-in-out infinite;
+        }
+
+        .tech-bubble:nth-child(1) {
+            width: 50px;
+            height: 50px;
+            top: -20px;
+            left: -20px;
+            background: rgba(0, 212, 255, 0.2);
+            animation-delay: 0s;
+            content: 'React';
+        }
+
+        .tech-bubble:nth-child(2) {
+            width: 40px;
+            height: 40px;
+            bottom: -15px;
+            right: -15px;
+            background: rgba(255, 0, 128, 0.2);
+            animation-delay: 2s;
+            content: 'JS';
+        }
+
+        .tech-bubble:nth-child(3) {
+            width: 35px;
+            height: 35px;
+            top: 50%;
+            right: -25px;
+            background: rgba(0, 255, 136, 0.2);
+            animation-delay: 4s;
+            content: 'CSS';
+        }
+
+        /* Animations */
+        @keyframes aboutImageFloat {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-15px) rotate(1deg);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%) rotate(45deg);
+            }
+
+            100% {
+                transform: translateX(100%) rotate(45deg);
+            }
+        }
+
+        @keyframes floatBubble {
+
+            0%,
+            100% {
+                transform: translateY(0) translateX(0) scale(1);
+            }
+
+            25% {
+                transform: translateY(-20px) translateX(10px) scale(1.1);
+            }
+
+            50% {
+                transform: translateY(0) translateX(-10px) scale(0.9);
+            }
+
+            75% {
+                transform: translateY(10px) translateX(0) scale(1.05);
+            }
+        }
+
+        @keyframes gradientShift {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .about-profile-pic {
+                width: 250px;
+                height: 250px;
+            }
+
+            .tech-bubble {
+                display: none;
+                /* Hide bubbles on mobile for cleaner look */
+            }
+        }
+
+        /* 
         .about-image {
             text-align: center;
         }
@@ -368,7 +779,7 @@
             height: 200%;
             background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
             animation: shimmer 3s linear infinite;
-        }
+        } */
 
         .about-text {
             font-size: 1.2rem;
@@ -692,50 +1103,115 @@
 
         /* Animations */
         @keyframes fadeInLeft {
-            from { opacity: 0; transform: translateX(-50px); }
-            to { opacity: 1; transform: translateX(0); }
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         @keyframes fadeInRight {
-            from { opacity: 0; transform: translateX(50px); }
-            to { opacity: 1; transform: translateX(0); }
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
         }
 
         @keyframes profileFloat {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
         }
 
         @keyframes ringRotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-30px); }
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-30px);
+            }
         }
 
         @keyframes codeFloat {
-            0% { transform: translateY(100vh) translateX(0px); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100px) translateX(50px); opacity: 0; }
+            0% {
+                transform: translateY(100vh) translateX(0px);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100px) translateX(50px);
+                opacity: 0;
+            }
         }
 
         @keyframes aboutImageFloat {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
         }
 
         @keyframes shimmer {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+            0% {
+                transform: translateX(-100%) translateY(-100%) rotate(45deg);
+            }
+
+            100% {
+                transform: translateX(100%) translateY(100%) rotate(45deg);
+            }
         }
 
         /* Responsive Design */
@@ -806,6 +1282,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Navigation -->
     <nav class="navbar">
@@ -831,8 +1308,8 @@
         <div class="floating-element"></div>
         <div class="floating-element"></div>
         <div class="floating-element"></div>
-        
-        
+
+
         <!-- Code Particles -->
         <div class="code-particle">&lt;/React&gt;</div>
         <div class="code-particle">&lt;/Redux&gt;</div>
@@ -840,13 +1317,13 @@
         <div class="code-particle">HTML5</div>
         <div class="code-particle">CSS3</div>
         <div class="code-particle">Tailwind CSS</div>
-        
+
         <div class="hero-content">
             <div class="hero-text">
                 <h1>Prem Shankar</h1>
                 <p class="hero-subtitle">Dynamic Frontend Developer</p>
                 <p class="hero-description">
-                    Expert in React.js with 4+ years of experience delivering impactful client projects. 
+                    Expert in React.js with 4+ years of experience delivering impactful client projects.
                     Passionate about creating exceptional user experiences with modern web technologies.
                 </p>
                 <div class="cta-buttons">
@@ -854,13 +1331,15 @@
                     <a href="#projects" class="cta-button secondary">View My Work</a>
                 </div>
             </div>
-            
+
             <div class="hero-image">
                 <div class="profile-container">
                     <div class="profile-ring"></div>
                     <div class="profile-ring"></div>
                     <div class="profile-ring"></div>
-                    <div class="profile-image">PS</div>
+                    <div class="profile-image">
+                        <img src="./img/profile.png" alt="Profile Picture">
+                    </div>
                 </div>
             </div>
         </div>
@@ -871,13 +1350,31 @@
         <div class="container">
             <h2 class="section-title">About Me</h2>
             <div class="about-content">
+                <!-- <div class="about-image">
+                    <div class="about-profile-pic">
+                        <img src="./img/Prem_img.png" alt="Profile Picture" height="300" width="300">
+                    </div>
+                </div> -->
                 <div class="about-image">
-                    <div class="about-profile-pic">PS</div>
+                    <div class="about-profile-pic">
+                        <img src="./img/Prem_img.png" alt="Profile Picture">
+                        <div class="tech-bubble"></div>
+                        <div class="tech-bubble"></div>
+                        <div class="tech-bubble"></div>
+                    </div>
                 </div>
                 <div class="about-text">
-                    <p>Dynamic Frontend Developer with <span class="highlight">proven success at AgBe Technology Solutions</span>, delivering impactful client projects. Expert in React.js and adept at implementing responsive designs, enhancing user experiences.</p>
-                    <p>Strong collaborator with a focus on quality through code reviews and <span class="highlight">Agile methodologies</span>, ensuring optimal performance and client satisfaction. Currently working on <span class="highlight">10+ diverse client projects</span> with expertise in modern web technologies.</p>
-                    <p>Passionate about creating <span class="highlight">Progressive Web Applications</span> with cutting-edge interface design best practices and maintaining high code quality standards. Awarded <span class="highlight">long-term associate certification</span> for three years of excellence.</p>
+                    <p>Dynamic Frontend Developer with <span class="highlight">proven success at AgBe Technology
+                            Solutions</span>, delivering impactful client projects. Expert in React.js and adept at
+                        implementing responsive designs, enhancing user experiences.</p>
+                    <p>Strong collaborator with a focus on quality through code reviews and <span
+                            class="highlight">Agile methodologies</span>, ensuring optimal performance and client
+                        satisfaction. Currently working on <span class="highlight">10+ diverse client projects</span>
+                        with expertise in modern web technologies.</p>
+                    <p>Passionate about creating <span class="highlight">Progressive Web Applications</span> with
+                        cutting-edge interface design best practices and maintaining high code quality standards.
+                        Awarded <span class="highlight">long-term associate certification</span> for three years of
+                        excellence.</p>
                 </div>
             </div>
         </div>
@@ -957,14 +1454,20 @@
                     <div class="duration">Feb 2021 - Present</div>
                 </div>
                 <ul class="achievements">
-                    <li>Contributed to <strong>10 diverse client projects</strong>, including Akara and TVS Moto Connect Application</li>
-                    <li>Maintained expertise in <strong>React state management strategies</strong> for optimal performance</li>
+                    <li>Contributed to <strong>10 diverse client projects</strong>, including Akara and TVS Moto Connect
+                        Application</li>
+                    <li>Maintained expertise in <strong>React state management strategies</strong> for optimal
+                        performance</li>
                     <li>Designed <strong>REST calls in React</strong>, enhancing user interface efficiency by 40%</li>
-                    <li>Created <strong>Progressive Web Applications</strong> with Facebook's interface design best practices</li>
+                    <li>Created <strong>Progressive Web Applications</strong> with Facebook's interface design best
+                        practices</li>
                     <li>Collaborated with project managers on coding milestones for pre-release software</li>
-                    <li>Conducted comprehensive <strong>code reviews</strong> to ensure quality and adherence to best practices</li>
-                    <li>Implemented <strong>responsive design principles</strong> for seamless multi-device compatibility</li>
-                    <li>Utilized <strong>Git for version control</strong>, branch management, and efficient code merging</li>
+                    <li>Conducted comprehensive <strong>code reviews</strong> to ensure quality and adherence to best
+                        practices</li>
+                    <li>Implemented <strong>responsive design principles</strong> for seamless multi-device
+                        compatibility</li>
+                    <li>Utilized <strong>Git for version control</strong>, branch management, and efficient code merging
+                    </li>
                 </ul>
             </div>
         </div>
@@ -981,57 +1484,98 @@
                         <p class="project-tech">React.js • Redux • Axios • Saga • Tailwind CSS</p>
                     </div>
                     <div class="project-body">
-                        <p>Advanced sales management platform featuring modern UI/UX design, state-of-the-art performance optimization, and comprehensive analytics dashboard for enhanced business insights.</p>
+                        <p>Advanced sales management platform featuring modern UI/UX design, state-of-the-art
+                            performance optimization, and comprehensive analytics dashboard for enhanced business
+                            insights.</p>
                     </div>
                 </div>
-                
+
                 <div class="project-card">
                     <div class="project-header">
                         <h3 class="project-title">Stashfin</h3>
                         <p class="project-tech">React.js • Redux • Material-UI • Bootstrap • MySQL</p>
                     </div>
                     <div class="project-body">
-                        <p>Comprehensive financial technology application with secure database integration, responsive design, and intuitive user interface for seamless financial management.</p>
+                        <p>Comprehensive financial technology application with secure database integration, responsive
+                            design, and intuitive user interface for seamless financial management.</p>
                     </div>
                 </div>
-                
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">Akara</h3>
+                        <p class="project-tech">WordPress</p>
+                    </div>
+                    <div class="project-body">
+                        <p>Comprehensive financial technology application with secure database integration, responsive
+                            design, and intuitive user interface for seamless financial management.</p>
+                    </div>
+                </div>
+
                 <div class="project-card">
                     <div class="project-header">
                         <h3 class="project-title">TVS Moto Connect</h3>
                         <p class="project-tech">React.js • Redux • i18next • SCSS • Bootstrap</p>
                     </div>
                     <div class="project-body">
-                        <p>Automotive connectivity platform with multi-language internationalization support, advanced user interface components, and real-time vehicle data integration.</p>
+                        <p>Automotive connectivity platform with multi-language internationalization support, advanced
+                            user interface components, and real-time vehicle data integration.</p>
                     </div>
                 </div>
-                
+
                 <div class="project-card">
                     <div class="project-header">
                         <h3 class="project-title">Tru Champ Application</h3>
                         <p class="project-tech">React.js • Redux • Thunk • i18next • SCSS</p>
                     </div>
                     <div class="project-body">
-                        <p>Championship management system featuring multi-language support, advanced state management, and comprehensive tournament tracking capabilities.</p>
+                        <p>Championship management system featuring multi-language support, advanced state management,
+                            and comprehensive tournament tracking capabilities.</p>
                     </div>
                 </div>
-                
+
                 <div class="project-card">
                     <div class="project-header">
                         <h3 class="project-title">Grest (CS & Admin Portal)</h3>
                         <p class="project-tech">React.js • Redux • Saga • i18next • Tailwind</p>
                     </div>
                     <div class="project-body">
-                        <p>Customer service and administrative portal with sophisticated workflow management, real-time notifications, and comprehensive reporting system.</p>
+                        <p>Customer service and administrative portal with sophisticated workflow management, real-time
+                            notifications, and comprehensive reporting system.</p>
                     </div>
                 </div>
-                
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">Audit Application </h3>
+                        <p class="project-tech">React.js • Redux.js • Axios • Saga • i18next • HTML • Tailwind</p>
+                    </div>
+                    <div class="project-body">
+                        <p>Advanced Audit management platform featuring modern UI/UX design, state-of-the-art
+                            performance optimization, and comprehensive analytics dashboard for enhanced business
+                            insights.</p>
+                    </div>
+                </div>
+
                 <div class="project-card">
                     <div class="project-header">
                         <h3 class="project-title">The Kunsultant</h3>
                         <p class="project-tech">React.js • Redux • Thunk • Axios</p>
                     </div>
                     <div class="project-body">
-                        <p>Professional consultation platform with streamlined user experience, robust backend integration, and efficient appointment management system.</p>
+                        <p>Professional consultation platform with streamlined user experience, robust backend
+                            integration, and efficient appointment management system.</p>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">Luxury Unplugged </h3>
+                        <p class="project-tech">React.js(function components) • Axios • HTML • Tailwind CSS</p>
+                    </div>
+                    <div class="project-body">
+                        <p>Advanced E-commerce management platform featuring modern UI/UX design, state-of-the-art
+                            performance optimization, and comprehensive analytics dashboard for enhanced business
+                            insights.</p>
                     </div>
                 </div>
             </div>
@@ -1074,7 +1618,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <form class="contact-form">
                     <h3 style="color: #fff; margin-bottom: 1rem; text-align: center;">Send Message</h3>
                     <div class="form-group">
@@ -1098,14 +1642,15 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Prem Shankar. All rights reserved. | Dynamic Frontend Developer with 4+ years of expertise in React.js</p>
+            <p>&copy; 2025 Prem Shankar. All rights reserved. | Dynamic Frontend Developer with 4+ years of expertise in
+                React.js</p>
         </div>
     </footer>
 
     <script>
         // Global variable to track EmailJS status
         let emailJSLoaded = false;
-        
+
         // Load EmailJS dynamically
         function loadEmailJS() {
             return new Promise((resolve, reject) => {
@@ -1125,7 +1670,7 @@
                 document.head.appendChild(script);
             });
         }
-        
+
         // Alternative email functionality using mailto
         function sendEmailFallback(formData) {
             const subject = encodeURIComponent(`Portfolio Contact: ${formData.subject}`);
@@ -1136,17 +1681,17 @@
                 `Message:\n${formData.message}\n\n` +
                 `---\nSent from portfolio contact form`
             );
-            
+
             const mailtoLink = `mailto:prem.shankar.official10@gmail.com?subject=${subject}&body=${body}`;
-            
+
             // Try to open mail client
             const link = document.createElement('a');
             link.href = mailtoLink;
             link.click();
-            
+
             return Promise.resolve();
         }
-        
+
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -1178,7 +1723,7 @@
         //     e.preventDefault();
         //     const btn = this.querySelector('.submit-btn');
         //     const originalText = btn.textContent;
-            
+
         //     // Get form data
         //     const formData = {
         //         from_name: this.querySelector('input[placeholder="Your Name"]').value,
@@ -1192,17 +1737,17 @@
         //     btn.textContent = 'Sending...';
         //     btn.style.background = 'linear-gradient(45deg, #ff0080, #ff4040)';
         //     btn.disabled = true;
-            
+
         //     // Send email using EmailJS
         //     emailjs.send('service_etu16ke', 'template_ch17g9k', formData)
         //         .then(function(response) {
         //             console.log('Email sent successfully:', response);
         //             btn.textContent = '✓ Message Sent!';
         //             btn.style.background = 'linear-gradient(45deg, #00ff88, #00d4ff)';
-                    
+
         //             // Show success message
         //             showNotification('Message sent successfully! I\'ll get back to you soon.', 'success');
-                    
+
         //             setTimeout(() => {
         //                 btn.textContent = originalText;
         //                 btn.style.background = 'linear-gradient(45deg, #00d4ff, #0080ff)';
@@ -1213,10 +1758,10 @@
         //             console.error('Email sending failed:', error);
         //             btn.textContent = '✗ Failed to Send';
         //             btn.style.background = 'linear-gradient(45deg, #ff4040, #ff0080)';
-                    
+
         //             // Show error message
         //             showNotification('Failed to send message. Please try again or contact directly.', 'error');
-                    
+
         //             setTimeout(() => {
         //                 btn.textContent = originalText;
         //                 btn.style.background = 'linear-gradient(45deg, #00d4ff, #0080ff)';
@@ -1224,62 +1769,62 @@
         //             }, 3000);
         //         });
         // });
-        
 
-        document.querySelector('.contact-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const btn = this.querySelector('.submit-btn');
-    const originalText = btn.textContent;
 
-    // Get form data
-    const formData = {
-        from_name: this.querySelector('input[placeholder="Your Name"]').value,
-        from_email: this.querySelector('input[placeholder="Your Email"]').value,
-        subject: this.querySelector('input[placeholder="Subject"]').value,
-        message: this.querySelector('textarea').value,
-        // address:'Gurugram, Haryana, India',
-        to_email: 'prem.shankar.official10@gmail.com',
-        date_time: new Date().toLocaleString()
-    };
+        document.querySelector('.contact-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const btn = this.querySelector('.submit-btn');
+            const originalText = btn.textContent;
 
-    // Show loading state
-    btn.textContent = 'Sending...';
-    btn.style.background = 'linear-gradient(45deg, #ff0080, #ff4040)';
-    btn.disabled = true;
+            // Get form data
+            const formData = {
+                from_name: this.querySelector('input[placeholder="Your Name"]').value,
+                from_email: this.querySelector('input[placeholder="Your Email"]').value,
+                subject: this.querySelector('input[placeholder="Subject"]').value,
+                message: this.querySelector('textarea').value,
+                // address:'Gurugram, Haryana, India',
+                to_email: 'prem.shankar.official10@gmail.com',
+                date_time: new Date().toLocaleString()
+            };
 
-    // Ensure EmailJS is loaded before using it
-    const ensureEmailJS = emailJSLoaded ? Promise.resolve() : loadEmailJS();
+            // Show loading state
+            btn.textContent = 'Sending...';
+            btn.style.background = 'linear-gradient(45deg, #ff0080, #ff4040)';
+            btn.disabled = true;
 
-    ensureEmailJS
-        .then(() => {
-            return emailjs.send('service_etu16ke', 'template_ch17g9k', formData);
-        })
-        .then(function(response) {
-            console.log('Email sent successfully:', response);
-            btn.textContent = '✓ Message Sent!';
-            btn.style.background = 'linear-gradient(45deg, #00ff88, #00d4ff)';
-            showNotification('Message sent successfully! I\'ll get back to you soon.', 'success');
+            // Ensure EmailJS is loaded before using it
+            const ensureEmailJS = emailJSLoaded ? Promise.resolve() : loadEmailJS();
 
-            setTimeout(() => {
-                btn.textContent = originalText;
-                btn.style.background = 'linear-gradient(45deg, #00d4ff, #0080ff)';
-                btn.disabled = false;
-                document.querySelector('.contact-form').reset();
-            }, 3000);
-        })
-        .catch(function(error) {
-            console.error('Email sending failed:', error);
-            btn.textContent = '✗ Failed to Send';
-            btn.style.background = 'linear-gradient(45deg, #ff4040, #ff0080)';
-            showNotification('Failed to send message. Please try again or contact directly.', 'error');
+            ensureEmailJS
+                .then(() => {
+                    return emailjs.send('service_etu16ke', 'template_ch17g9k', formData);
+                })
+                .then(function (response) {
+                    console.log('Email sent successfully:', response);
+                    btn.textContent = '✓ Message Sent!';
+                    btn.style.background = 'linear-gradient(45deg, #00ff88, #00d4ff)';
+                    showNotification('Message sent successfully! I\'ll get back to you soon.', 'success');
 
-            setTimeout(() => {
-                btn.textContent = originalText;
-                btn.style.background = 'linear-gradient(45deg, #00d4ff, #0080ff)';
-                btn.disabled = false;
-            }, 3000);
+                    setTimeout(() => {
+                        btn.textContent = originalText;
+                        btn.style.background = 'linear-gradient(45deg, #00d4ff, #0080ff)';
+                        btn.disabled = false;
+                        document.querySelector('.contact-form').reset();
+                    }, 3000);
+                })
+                .catch(function (error) {
+                    console.error('Email sending failed:', error);
+                    btn.textContent = '✗ Failed to Send';
+                    btn.style.background = 'linear-gradient(45deg, #ff4040, #ff0080)';
+                    showNotification('Failed to send message. Please try again or contact directly.', 'error');
+
+                    setTimeout(() => {
+                        btn.textContent = originalText;
+                        btn.style.background = 'linear-gradient(45deg, #00d4ff, #0080ff)';
+                        btn.disabled = false;
+                    }, 3000);
+                });
         });
-});
 
 
         // Notification system
@@ -1289,7 +1834,7 @@
             if (existingNotification) {
                 existingNotification.remove();
             }
-            
+
             // Create notification element
             const notification = document.createElement('div');
             notification.className = `notification ${type}`;
@@ -1300,7 +1845,7 @@
                     <button class="notification-close" onclick="this.parentElement.parentElement.remove()">×</button>
                 </div>
             `;
-            
+
             // Add notification styles
             notification.style.cssText = `
                 position: fixed;
@@ -1316,7 +1861,7 @@
                 max-width: 400px;
                 font-family: inherit;
             `;
-            
+
             // Add animation keyframes if not already added
             if (!document.querySelector('#notification-styles')) {
                 const style = document.createElement('style');
@@ -1356,9 +1901,9 @@
                 `;
                 document.head.appendChild(style);
             }
-            
+
             document.body.appendChild(notification);
-            
+
             // Auto remove after 5 seconds
             setTimeout(() => {
                 if (notification.parentElement) {
@@ -1380,7 +1925,7 @@
                     entry.target.style.opacity = '0';
                     entry.target.style.transform = 'translateY(50px)';
                     entry.target.style.transition = 'all 0.8s ease';
-                    
+
                     setTimeout(() => {
                         entry.target.style.opacity = '1';
                         entry.target.style.transform = 'translateY(0)';
@@ -1408,7 +1953,7 @@
 
         function typeEffect() {
             const currentText = texts[textIndex];
-            
+
             if (isDeleting) {
                 subtitle.textContent = currentText.substring(0, charIndex - 1);
                 charIndex--;
@@ -1438,7 +1983,7 @@
         window.addEventListener('scroll', () => {
             const scrolled = window.pageYOffset;
             const parallaxElements = document.querySelectorAll('.floating-element');
-            
+
             parallaxElements.forEach((element, index) => {
                 const speed = 0.5 + (index * 0.1);
                 element.style.transform = `translateY(${scrolled * speed}px)`;
@@ -1451,10 +1996,10 @@
             const rect = profileImage.getBoundingClientRect();
             const centerX = rect.left + rect.width / 2;
             const centerY = rect.top + rect.height / 2;
-            
+
             const deltaX = (e.clientX - centerX) * 0.01;
             const deltaY = (e.clientY - centerY) * 0.01;
-            
+
             profileImage.style.transform = `translateY(-10px) rotate(${deltaX}deg) rotateY(${deltaY}deg)`;
         });
 
@@ -1465,4 +2010,5 @@
         });
     </script>
 </body>
+
 </html>
